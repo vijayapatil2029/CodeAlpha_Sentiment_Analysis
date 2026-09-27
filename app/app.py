@@ -21,8 +21,32 @@ st.markdown(
     """
     <style>
     .stApp { background: #f5f7fb; }
+    /* Global readable text */
+    .stMarkdown,
+    .stMarkdown p,
+    .stMarkdown span,
+    .stMarkdown li,
+    label {
+        color: #172337 !important;
+    }
     [data-testid="stSidebar"] { background: #111827; }
-    [data-testid="stSidebar"] * { color: #f9fafb !important; }
+    [data-testid="stSidebar"] *,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] div,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] a {
+        color: #f9fafb !important;
+    }
+
+    /* Fix visibility of Streamlit metric values */
+    [data-testid="stMetricValue"],
+    [data-testid="stMetricValue"] *,
+    [data-testid="stMetricLabel"],
+    [data-testid="stMetricLabel"] * {
+        color: #172337 !important;
+    }
+
 
     .main-title {
         color: #172337; font-size: 38px; font-weight: 800;
@@ -624,21 +648,36 @@ if analyze:
         c1, c2, c3 = st.columns(3)
 
         with c1:
-            st.metric(
-                f"{icon} Predicted Sentiment",
-                label
+            st.markdown(
+                f"""
+                <div class="metric-card">
+                    <div class="metric-title">{icon} Predicted Sentiment</div>
+                    <div class="metric-value">{label}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
 
         with c2:
-            st.metric(
-                "👍 Positive Signals",
-                pos
+            st.markdown(
+                f"""
+                <div class="metric-card">
+                    <div class="metric-title">👍 Positive Signals</div>
+                    <div class="metric-value">{pos}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
 
         with c3:
-            st.metric(
-                "⚠️ Negative Signals",
-                neg
+            st.markdown(
+                f"""
+                <div class="metric-card">
+                    <div class="metric-title">⚠️ Negative Signals</div>
+                    <div class="metric-value">{neg}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
             )
 
         # ----------------------------------------------------
