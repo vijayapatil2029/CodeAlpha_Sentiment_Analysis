@@ -1,0 +1,7 @@
+data/Reviews.csv
+data/Reviews_with_VADER.csv
+data/dashboard_reviews.csv
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
